@@ -1,0 +1,15 @@
+.article-metadata-2 {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #CFE5FF	;
+}
+
+.article-metadata-2 a:hover {
+        color: #333;
+        text-decoration: none;
+}
+
+.rounded-circle-2 {
+    border-radius:70%;
+    border: 10px solid #fafafa;
+}

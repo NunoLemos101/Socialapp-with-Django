@@ -1,0 +1,50 @@
+{% extends "Blog_sys/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}  
+        
+    <a href="{% url 'send-message' other_user.id %}" class="btn btn-outline-success mb-4">Send a Message</a> 
+    {% for txt in message_list %}
+      {% if txt.from_user != request.user %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ txt.from_user.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              {% if txt.from_user == request.user %}
+                <a class="mr-2" href="{% url 'profile-detail' txt.from_user.id %}">You</a>
+              {% else %}  
+                <a class="mr-2" href="{% url 'profile-detail' txt.from_user.id %}">{{ txt.from_user }}</a>
+              {% endif %}
+                <small class="text-muted">{{ txt.date_sent|date:"F j , Y , H:i" }}</small>
+            </div>
+            <p class="article-content">{{ txt.message }}</p>
+          </div>
+        </article>
+      {% elif txt.from_user == request.user %}
+         
+        <article style="background-color:#98bbcd" class="media content-section">
+          <img class="rounded-circle article-img" src="{{ txt.from_user.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata-2">
+              {% if txt.from_user == request.user %}
+                <a class="mr-2" href="{% url 'profile-detail' txt.from_user.id %}">You</a>
+              {% else %}  
+                <a class="mr-2" href="{% url 'profile-detail' txt.from_user.id %}">{{ txt.from_user }}</a>
+              {% endif %}
+                <small class="text-muted">{{ txt.date_sent|date:"F j , Y , H:i" }}</small>
+            </div>
+            <p class="article-content">{{ txt.message }}</p>
+          </div>
+        </article>        
+        
+
+          
+        </article>
+        
+      {% endif %}
+
+    {% endfor %}
+<script>
+console.log('{{ request.user }}')
+</script>
+
+{% endblock content %}

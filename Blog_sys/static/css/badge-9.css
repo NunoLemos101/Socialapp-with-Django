@@ -1,0 +1,24 @@
+.badge-9 {
+    position: relative;
+    top: 0px;
+    right: 0px ;
+    padding: 5px 6px ;
+    border-radius:  100%;
+    background-color: #c51919;
+    color: white;
+    font-size: 13px;
+    font-style: normal;
+}
+
+.badge-9:hover {
+    position: relative;
+    top: 0px;
+    right: 0px ;
+    padding: 5px 6px ;
+    border-radius:  100%;
+    background-color: #942222;
+    color: white;
+    font-size: 13px;
+    font-style: normal;
+    text-decoration: none;
+}

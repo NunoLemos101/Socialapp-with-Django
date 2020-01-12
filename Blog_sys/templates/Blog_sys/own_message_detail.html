@@ -1,0 +1,21 @@
+{% extends 'Blog_sys/base.html'%}
+{% block content %}
+
+{% for txt in message_list %}
+
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ txt.from_user.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              {% if txt.from_user == request.user %}
+                <a class="mr-2" href="{% url 'profile-detail' txt.from_user.id %}">You</a>
+              {% else %}  
+                <a class="mr-2" href="{% url 'profile-detail' txt.from_user.id %}">{{ txt.from_user }}</a>
+              {% endif %}
+                <small class="text-muted">{{ txt.date_sent|date:"F j , Y , H:i" }}</small>
+            </div>
+            <p class="article-content">{{ txt.message }}</p>
+          </div>
+        </article>
+{% endfor %}
+{% endblock content %}

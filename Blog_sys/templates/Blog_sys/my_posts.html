@@ -1,0 +1,24 @@
+{% extends "Blog_sys/base.html" %}
+{% block content %}
+            <fieldset class="form-group">
+              <legend class="border-bottom mb-2">Your Posts</legend>
+            </fieldset>
+            <div class="form-group">
+              <a href="{% url 'post-create' %}" class="btn btn-outline-success mt--1 mb-2" type="button">Create New Post</a>
+            </div>
+    {% for post in posts %}
+        {% if post.author == user %}  
+          <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="{% url 'profile-detail' post.author.id %}">{{ post.author }}</a>
+                <small class="text-muted">{{ post.date_posted|date:"F j , Y , H:i" }}</small>
+              </div>
+              <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+              <p class="article-content">{{ post.content }}</p>
+            </div>
+          </article>        
+        {% endif %}    
+    {% endfor %}
+{% endblock content %}

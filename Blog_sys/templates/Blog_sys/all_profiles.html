@@ -1,0 +1,46 @@
+{% extends "blog_sys/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <article style="background-color:#5f788a" class="media content-section">
+      <i class="fa fa-search mt-2" style='color:white' ></i></img><input class="form-control ml-3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Users">
+  </article>
+<ul id="myUL" class="demo">
+  {% for user in users %}
+    {% if user.username != request.user.username %}
+      <li>
+        <div class="media content-section">
+          <div class="media">
+            <a href="{% url 'profile-detail' user.id %}"><img class="rounded-circle account-img" src="{{ user.profile.image.url }}"></a>
+            <div class="media-body">
+              <h2><a href="{% url 'profile-detail' user.id %}"  class="account-heading article-title">{{ user.username }}</a></h2>
+              <span> <a display:inline class="article-title"href="{% url 'followers-list' user.id %}"> <strong> {{ user.profile.followers_view }} </strong>Followers</a>  <span style="opacity:0%">...</span> <a class="article-title" href="{% url 'following-list' user.id %}"> Following <strong>{{ user.profile.following_view }}</strong> </a></span>
+              <p class="text-secondary">{{ user.email }}</p>
+            </div>
+          </div>
+        </div>
+      </li>  
+    {% endif%}  
+  {% endfor %}        
+</ul>
+<script>function myFunction() {
+    // Declare variables
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName('li');
+  
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("h2")[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
+</script>  
+<script srf="/static/js/SearchProfileBar.js"></script>
+{% endblock content %}

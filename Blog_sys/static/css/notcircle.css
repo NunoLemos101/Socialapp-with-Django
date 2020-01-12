@@ -1,0 +1,38 @@
+
+
+.badge-9 {
+    position: relative;
+    top: -58px;
+    right: -606px ;
+    padding: 8px 9px ;
+    border-radius: 100%;
+    background-color: #c51919;
+    color: white;
+    font-size: 13px;
+    font-style: normal;    
+}
+
+.badge-9:link {
+    position: relative;
+    top: -58px;
+    right: -606px ;
+    padding: 8px 9px ;
+    border-radius: 100%;
+    background-color: #c51919;
+    color: white;
+    font-size: 13px;
+    font-style: normal;    
+}
+
+.badge-9:hover {
+    position: relative;
+    top: -58px;
+    right: -606px ;
+    padding: 8px 9px ;
+    border-radius: 100%;
+    background-color: #a51616;
+    color: white;
+    font-size: 13px;
+    font-style: normal;    
+    text-decoration: none;
+}

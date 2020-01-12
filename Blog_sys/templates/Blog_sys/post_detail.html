@@ -1,0 +1,53 @@
+{% extends "Blog_sys/base.html" %}
+{% block content %}
+        <article class="media content-section mb-2">
+          <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">  <!-- ATENÇAO , Para mudar para Generic View, mudar 'post.' para 'object.' -->
+          <div class="media-body">                                                            <!-- por exemplo: mudar 'post.title' para 'object.title' -->
+            <div class="article-metadata">
+              <a class="mr-2" href="{% url 'profile-detail' post.author.id %}">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted|date:"F j , Y , H:i" }}</small>   
+            </div>
+            <h2 class="article-title">{{ post.title }}</h2>
+            <p class="article-content">{{ post.content }}</p>
+            <hr>
+            <form action = "{% url 'like_post' %}" method = "post">
+              {% csrf_token %}
+              {% if is_liked %}
+                <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-success btn-sm mr-2">Dislike {{ post.likes.count }}</button>
+
+              {% else %}
+                <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-outline-primary btn-sm mr-2">Like {{ post.likes.count }}</button>
+              {% endif %}
+              {% if post.author == user %}
+                <a class="btn btn-outline-secondary btn-sm 0" href="{% url 'like-count' post.id %}">Users who Liked</a> 
+                <a class="btn btn-outline-info btn-sm mx-2"href="{% url 'post-update' post.id %}">Update</a>
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'post-delete' post.id %}">Delete</a>
+              {% endif %}
+            </form>
+
+            
+            {% for tag in post.booleans %} 
+              <div class="text-muted">
+                <font size="2">
+                  <p>{{ tag }}</p>
+                </font>
+              </div>
+            {% endfor %} 
+          </div>
+        </article> 
+      <!--    {% if post.author == user %}
+            <div class="form-group">
+              <legend class="border-bottom mb-1">Author Tools</legend>
+            </div>
+            <article class="media content-section">
+                
+                
+                  <a class="btn btn-outline-secondary btn-sm 0" href="{% url 'like-count' post.id %}">Users who Liked</a>  
+                  <a class="btn btn-outline-info btn-sm mx-2"href="{% url 'post-update' post.id %}">Update</a>
+                  <a class="btn btn-outline-danger btn-sm" href="{% url 'post-delete' post.id %}">Delete</a>   
+                  
+                
+            </article>
+          {% endif %} -->
+
+{% endblock content %}

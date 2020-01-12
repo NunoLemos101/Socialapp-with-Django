@@ -1,0 +1,36 @@
+{% extends "blog_sys/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ another_user.profile.image.url }}">
+        <div class="media-body">
+            <h2 class="account-heading">{{ another_user.username }}</h2>
+            <span> <a display:inline class="article-title"href="{% url 'followers-list' another_user.id %}"> <strong>{{ followers_number }} </strong>Followers</a> <span style="opacity:0%">...</span> <a class="article-title" href="{% url 'following-list' another_user.id %}">Following <strong>{{ following_number }}</strong> </a></span>
+            <p class="text-secondary">{{ another_user.email }}</p>
+            
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+            <form action = "{% url 'user-add' %}" method = "post">
+              {% csrf_token %}
+                <a href="{% url 'user-posts' another_user.username %}" class ="btn btn-outline-info">View {{ another_user.username}} Posts</a>
+                <a href="{% url 'user-messages' another_user.id %}" class="btn btn-outline-secondary">Send a Message</a>
+              {% if user.is_authenticated %}  
+                {% if request.user.id != another_user.id %}
+                  {% if is_following == False %}    
+                  
+                  
+                      <button type="submit" name="another_user_id" value="{{ another_user.id }}" class="btn btn-outline-success">Follow</button>
+                  {% else %}
+                      <button type="submit" name="another_user_id" value="{{ another_user.id }}" class="btn btn-outline-danger">Stop Following</button>
+                  
+                  {% endif %}
+                {% endif %}
+              {% endif %}  
+            </form>
+    </div>
+        
+{% endblock content %}

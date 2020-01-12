@@ -1,0 +1,35 @@
+.remove-edit {
+    text-decoration: none;
+    font-weight: 350;
+}
+
+.remove-edit:hover {
+    text-decoration: none;
+    color: #000000;
+}
+
+.remove-edit-2 {
+    text-decoration: none;
+    position: relative;
+    top: 3px;
+    right: 7px ;
+    padding: 5px 8px ;
+    color: black;
+    font-weight: 600;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.remove-edit-2:hover {
+    text-decoration: none;
+    position: relative;
+    top: 3px;
+    right: 7px ;
+    padding: 5px 8px ;
+    color: rgb(102, 101, 101);
+    font-size: 15px;
+    font-weight: 600;
+    font-style: normal;
+    font-weight: bold;
+}

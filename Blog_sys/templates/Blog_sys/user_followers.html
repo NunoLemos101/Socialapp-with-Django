@@ -1,0 +1,20 @@
+{% extends 'Blog_sys/base.html' %}
+{% block content %}
+
+<h1 class="mb-3">Followers ( {{ followers_count }} )</h1>
+
+{% for users in follow_users %}
+
+      <div class="media content-section">
+        <div class="media">
+          <a href="{% url 'profile-detail' users.sender.id %}"><img class="rounded-circle account-img" src="{{ users.sender.profile.image.url }}"></a>
+          <div class="media-body">
+            <h2><a href="{% url 'profile-detail' users.sender.id %}"  class="account-heading article-title">{{ users.sender }}</a></h2>
+            <p class="text-secondary">{{ users.sender.email }}</p>
+          </div>
+        </div>
+      </div>
+    <hr>
+{% endfor %}
+
+{% endblock content %}

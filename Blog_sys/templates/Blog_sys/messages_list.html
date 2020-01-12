@@ -1,0 +1,50 @@
+{% extends 'blog_sys/base.html' %}
+{% block content %}
+
+<article class="media content-section bord">
+  <div class="media">
+      <a href="{% url 'profile-detail' request.user.id %}"><img class="rounded-circle article-img ml-4" src="{{ request.user.profile.image.url }}"></a><p class="mt-3">Logged in as</p><p style="opacity:0%">..</p><a class="mt-3" href="{% url 'profile-detail' request.user.id %}">{{ request.user.username }}</a>
+  </div>
+</article>
+  <article style="background-color:#5f788a" class="media content-section">
+      <i class="fa fa-search mt-2" style='color:white' ></i></img><input class="form-control ml-3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Users">
+  </article>
+<ul id="myUL" class="demo">
+  {% for user in user_list %}
+    {% if user != request.user %}
+        <liu>
+        <a href="#"><div  id="{{ user }}body"class="media content-section">
+          <a href="{% url 'user-messages' user.id %}"><img class="rounded-circle article-img" src="{{ user.profile.image.url }}"></a>
+          <div class="media-body">
+            <div class="article-metadata">
+                <spani class="nowrap"><a class="account-heading article-title ft mr-2" href="{% url 'user-messages' user.id %}">{{ user.username }}</a></spani>
+                <small class="text-muted">{{ user.profile.last_message.date_sent|date:"F j , Y , H:i" }}</small>
+            </div>
+              <a href="{% url 'user-messages' user.id %}" id='{{user}}1'></a> 
+              <ulx id="{{ user }}">
+                {% for m in request.user.profile.isviewed %}
+                  {% if m.from_user == user %}
+                    <div id="changeresult"> 
+                      <li><p> {{ m.from_user }}</p></li>
+                    </div>
+                  {% else %}
+
+                  {% endif %}  
+                {% endfor%}  
+              </ulx>
+            {% if user.profile.last_message.from_user == request.user or user.profile.last_message.to_user == request.user %}  
+              <a href="{% url 'user-messages' user.id %}" class="text-secondary remove-edit" id='{{user}}text'> {{ user.profile.last_message }} </a>
+            {% else %}
+              <a href="{% url 'user-messages' user.id %}" class="text-secondary remove-edit" id='{{user}}text'> <b>There was a Error loading your message. You can still access them</b> </a>
+            {% endif %}
+          </div>
+        </div>       
+        </a>
+        </liu>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+<script src="/static/js/ListMessageScript.js"></script>
+
+{% endblock content %}
